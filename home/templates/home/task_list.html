@@ -1,0 +1,252 @@
+{% extends 'home/main.html' %}
+
+{% block content %}
+
+
+
+
+{% load static %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campos Webs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head> -->
+<nav >
+    <div class="nav-main" >
+        <div class="nav-header" >
+            <h3 style="color: red;">TO DO APP</h3>
+            <!-- <img src="{% static './download.svg' %}" alt="logo"> -->
+            <i class="fa fa-bars"></i>
+        </div>
+        <ul class="menu">
+            {% if request.user.is_authenticated %}
+            
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+
+            {% else %}
+
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+   
+    
+<!-- <script src="{% static 'index.js' %}"></script>
+</body>
+</html> -->
+
+<br/><br/>
+
+
+<form  class="form-inline my-2 my-lg-0 text-center" method="GET">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search-area" value="{{search_input}}" aria-label="Search" style="width:100%;">
+    <br/>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <!-- <a href="/"> <button class="btn btn-outline-success my-2 my-sm-0" >See all</button></a> -->
+</form>
+
+
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">TODOs List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Items
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav> -->
+
+    <div class="container my-4">
+        <h2 style="color:green" class="text-center">Hello {{request.user|title}}</h2>
+        <h5 class="text-center">You have <i style="color:red">{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h5>
+
+        <!-- <br/>
+        <br/> -->
+
+        <!-- <small id="emailHelp" class="form-text text-muted text-center">Add an item to the list</small>
+         
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+                
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="3"></textarea>
+            </div>
+            
+
+            <button   id="add" class="btn btn-primary">Add to list</button>
+            <button  id="clear" class="btn btn-primary" onclick="clearStorage()">Clear list</button> -->
+         
+
+        <div id="items" class="my-4">
+            <a href="/"> <button class="btn btn-outline-success my-2 my-sm-0" >See all</button></a>
+            <table class="table">
+                <thead style="color:blue">
+                  <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Item Title</th>
+                    <th scope="col">Item Description</th> 
+                    <th scope="col">Actions</th> 
+                  </tr>
+                </thead>
+                {% for task in tasks %}
+                <tbody id="tableBody">
+                  <tr>
+                    <th scope="row">{{task.id}}</th>
+                    <td>{{task.title}}</td>
+                    <td>{{task.description}}</td> 
+                    <!-- <td><i class="fa fa-eye"></i></td>  -->
+                    <!-- <td><i class="fa fa-pencil"></i></td>  -->
+                    <td>
+                        <!-- <a href="{% url 'task' task.id %}">
+                            <i style="color:green" class="fa fa-eye"></i>
+                        </a> <br/>  -->
+                        <a href="{% url 'task-update' task.id %}">
+                            <i style="color:blue" class="fa fa-pencil"></i>
+                        </a> <br/> 
+                        <a href="{% url 'task-delete' task.id %}">
+                            <i style="color:red" class="fa fa-trash"></i>
+                        </a>
+                    </td> 
+                    
+                  </tr>
+                  
+                  
+                </tbody>
+                
+     
+                  {% endfor %}
+               
+              </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+        <h3 style="margin:0;">You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h3>
+    </div>
+
+    {% if request.user.is_authenticated %}
+   
+    <a href="{% url 'logout' %}">Logout</a>
+
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+
+
+<hr/>
+
+<h1>My todo list app</h1>
+<a href="{% url 'task-create' %}">Add Task</a>
+ <br/> 
+
+<form method="GET">
+    <input type="text" name="search-area" value="{{search_input}}">
+    <input type="submit" value="search">
+</form>
+
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task' task.id %}">view</a></td>
+        <td><a href="{% url 'task-update' task.id %}">edit</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">delete</a></td>
+    </tr>
+    {% empty %}
+    <h3>No items in the list</h3>
+    {% endfor %}
+</table> -->
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

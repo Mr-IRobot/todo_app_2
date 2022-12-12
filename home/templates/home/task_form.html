@@ -1,0 +1,119 @@
+
+
+
+
+
+
+{% extends "home/base.html" %}
+
+
+{% block content %}
+
+{% load static %}
+<nav>
+  <div class="nav-main">
+      <div class="nav-header">
+          <h3 style="color: red;">TO DO APP</h3>
+          <!-- <img src="{% static './download.svg' %}" alt="logo"> -->
+          <i class="fa fa-bars"></i>
+      </div>
+      <ul class="menu">
+          {% if request.user.is_authenticated %}
+          
+          <li>
+              <a href="{% url 'logout' %}">Logout</a>
+          </li>
+
+          {% else %}
+
+          <li>
+              <a href="{% url 'login' %}">Login</a>
+          </li>
+          <li>
+              <a href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+      </ul>
+  </div>
+</nav>
+
+
+    
+    <section class="py-5">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-5">
+            <h1 class="hero-heading text-center">Edit Task</h1>
+            <!-- <p class="text-muted mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <!-- <h2 class="h4 mb-4">Returning user</h2> -->
+            <form class="mb-5" method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-lg-6 mb-3">
+                  <label class="form-label">Title</label><br/>
+                  {{form.title}}
+                  <!-- <input class="form-control" type="text" name="title" placeholder="Title"> -->
+                </div>
+                <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Description</label><br/>
+                    {{form.description}}
+                    <!-- <input class="form-control" type="text" name="title" placeholder="Title"> -->
+                  </div>
+                <!-- <div class="form-group col-lg-6 mb-3">
+                  <label class="form-label">Description</label><br/>
+                  {{form.description}}
+                  <textarea class="form-control"  type="text" name="description" placeholder="Description" style="width:100%; height:200px;"></textarea>
+                </div> -->
+                <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Completed</label><br/>
+                    {{form.complete}}
+                    <!-- <input class="form-control" type="text" name="title" placeholder="Title"> -->
+                  </div>
+                
+                <!-- <div class="form-group col-12 mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" id="flexCheckDefault" type="checkbox">
+                    <label class="form-check-label text-muted" for="flexCheckDefault">Remember me for next time</label>
+                  </div>
+                </div> -->
+                <div class="form-group col-12">
+                  <button class="btn btn-primary" type="submit">Create task</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-5 ms-auto">
+            
+            <a class="btn btn-primary" href="{% url 'tasks' %}">Go back</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

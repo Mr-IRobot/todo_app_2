@@ -1,0 +1,136 @@
+{% extends "home/base.html" %}
+
+
+{% block content %}
+
+{% load static %}
+
+
+<nav>
+  <div class="nav-main">
+      <div class="nav-header">
+          <h3 style="color: red;">TO DO APP</h3>
+          <!-- <img src="{% static './download.svg' %}" alt="logo"> -->
+          <i class="fa fa-bars"></i>
+      </div>
+      <ul class="menu">
+          {% if request.user.is_authenticated %}
+          
+          <li>
+              <a href="{% url 'logout' %}">Logout</a>
+          </li>
+
+          {% else %}
+
+          <li>
+              <a href="{% url 'login' %}">Login</a>
+          </li>
+          <li>
+              <a href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+      </ul>
+  </div>
+</nav>
+
+
+
+    <section class="py-5">
+      <div class="container py-5">
+        
+        <div class="row">
+          <div class="col-lg-6">
+            <h2 class="h4 mb-4">Register</h2>
+            <form class="mb-5" method="POST">
+              {% csrf_token %}
+              <!-- {{form.as_p}} -->
+              <div class="row">
+                  <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Username</label>
+                    <!-- {{form.username}} -->
+                    <input class="form-control" type="text" name="username" placeholder="Name">
+                  </div>
+                <!-- <div class="form-group col-lg-6 mb-3">
+                  <label class="form-label">Email address</label>
+                  <input class="form-control" type="email" name="email" placeholder="Email address">
+                </div>
+                <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Phone number</label>
+                    <input class="form-control" type="number" name="number" placeholder="Phone number">
+                  </div> -->
+                <div class="form-group col-lg-6 mb-3">
+                  <label class="form-label">Password</label>
+                  <!-- {{form.password1}} -->
+                  <input class="form-control" type="password" name="password1" placeholder="Password">
+                </div>
+                <div class="form-group col-lg-6 mb-3">
+                    
+                    <label class="form-label text-muted">
+                      <ol>
+                        <li>
+                          Your password can’t be too similar to your other personal information.
+                          
+                        </li>
+                        <li>
+                          
+                          Your password must contain at least 8 characters.
+                          
+                        </li>
+                        <li>
+                          
+                          Your password can’t be a commonly used password.
+                          
+                        </li>
+                        <li>
+                          
+                          Your password can’t be entirely numeric.
+                        </li>
+                      </ol>
+                      </label>
+                      <label class="form-label">Comfirm password</label>
+                    <!-- {{form.password2}} -->
+                    <input class="form-control" type="password" name="password2" placeholder="Comfirm password">
+                    <label class="form-label text-muted">
+                  
+                      Enter the same password as before, for verification.</label>
+                </div>
+                
+                <!-- <div class="form-group col-12 mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" id="flexCheckDefault" type="checkbox">
+                    <label class="form-check-label text-muted" for="flexCheckDefault">Remember me for next time</label>
+                  </div>
+                </div> -->
+                <div class="form-group col-12">
+                  <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-5 ms-auto">
+            <h2 class="h4 mb-4">Old customer</h2>
+            <p class="text-muted">Already have an account ?</p><a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

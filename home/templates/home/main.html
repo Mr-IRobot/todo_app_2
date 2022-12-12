@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>TO DO ITEMS</title> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="{% static 'Bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+        body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f1f5f8;
+    line-height: 2.2;
+    font-size: 0.875rem;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+nav{
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.fa-bars{
+    font-size: 1.5rem;
+    color: #e94949;
+    cursor: pointer;
+}
+
+.fa-bars:hover{
+    color:black;
+}
+.menu a {
+    color:gray;
+    letter-spacing: 0.1rem;
+    display: block;
+    padding: .5rem 1rem;
+    transition:  all .3s linear;
+}
+.show-menu{
+    height: 10rem;
+}
+.menu a:hover{
+    background: #f8a5a5;
+    color: #e94949;
+    padding-left: 1.5rem;
+}
+.menu{
+    height: 0;
+    overflow: hidden;
+    transition: all .3s linear;
+}
+.show-menu{
+    height: 10rem;
+}
+.nav-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+@media(min-width: 800px) {
+    .nav-main{
+        max-width: 1170px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+    .nav-header{
+        padding: 0;
+    }
+    .fa-bars{
+    display: none;
+    }
+    .menu{
+        height: auto;
+        display: flex;
+    }
+}
+
+.menu a{
+    padding: 0;
+    margin: 0 .5rem;
+}
+
+.menu a:hover{
+    padding: 0;
+    background: transparent;
+}
+    </style>
+
+    
+</head>
+<body>
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    
+
+
+    <script src="{% static 'index.js' %}"></script>
+    <script src="{% static 'main.js' %}"></script>
+    <script>
+        const bar = document.querySelector(".fa-bars");
+const menu = document.querySelector(".menu");
+
+bar.addEventListener("click", ()=>{
+    menu.classList.toggle("show-menu");
+});
+    </script>
+</body>
+</html>
